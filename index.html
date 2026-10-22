@@ -481,6 +481,11 @@
       width: 45%;
     }
 
+    /* Widest card (South China Sea) */
+    .spotlight-view-container.layout-left.card-wider .dialog-card {
+      width: 52.5%;
+    }
+
     .center-modal {
       background: #ffffff;
       border-radius: 8px;
@@ -571,7 +576,8 @@
       .spotlight-circle-frame { width: 90px; height: 90px; }
       .spotlight-view-container.layout-left .spotlight-stack { padding-left: 1rem; }
       .spotlight-view-container.layout-left .dialog-card { width: 90%; left: 5%; }
-      .spotlight-view-container.layout-left.card-wide .dialog-card { width: 90%; }
+      .spotlight-view-container.layout-left.card-wide .dialog-card,
+      .spotlight-view-container.layout-left.card-wider .dialog-card { width: 90%; }
     }
   </style>
 </head>
@@ -745,8 +751,8 @@
       southchina: {
         title: "Islands in the South China Sea",
         body: "In 2014, China started constructing artificial islands in the South China Sea. These islands have been transformed into military facilities, projecting China’s military power in the disputed maritime region and pushing back against the US naval presence in the western Pacific. The US and its allies have seen this as destabilising and intimidating.",
-        mapImg: "Resources/PastedVector-29.svg",
-        layoutClass: ""
+        mapImg: "Resources/PastedVector-32.svg",
+        layoutClass: "layout-left zoom-map card-wider"
       }
     };
 
