@@ -476,6 +476,11 @@
       transform-origin: 50.7% 51.7%;
     }
 
+    /* Wider card (Yemen) */
+    .spotlight-view-container.layout-left.card-wide .dialog-card {
+      width: 45%;
+    }
+
     .center-modal {
       background: #ffffff;
       border-radius: 8px;
@@ -566,6 +571,7 @@
       .spotlight-circle-frame { width: 90px; height: 90px; }
       .spotlight-view-container.layout-left .spotlight-stack { padding-left: 1rem; }
       .spotlight-view-container.layout-left .dialog-card { width: 90%; left: 5%; }
+      .spotlight-view-container.layout-left.card-wide .dialog-card { width: 90%; }
     }
   </style>
 </head>
@@ -726,9 +732,9 @@
       },
       yemen: {
         title: "War and famine in Yemen",
-        body: "In 2014, a long-running conflict between the predominantly Sunni government of Yemen and rebels belonging to the mainly Shia Houthi movement—with links to Iran—erupted into a civil war. After the Houthis captured the capital, the conflict turned into another front in the contest for regional dominance between Iran and Saudi Arabia and another example of the US' inability to restrain military adventurism in the Middle East.",
-        mapImg: "Resources/PastedVector-29.svg",
-        layoutClass: ""
+        body: "In 2014, a long-running conflict between the predominantly Sunni government of Yemen and rebels belonging to the mainly Shia Houthi movement—with links to Iran—erupted into a civil war. After the Houthis captured the capital, the conflict turned into another front in the contest for regional dominance between Iran and Saudi Arabia and another example of the US' inability to restrain military adventurism in the Middle East. The ousted government appealed to the Saudis, who intervened militarily on its side, leading a coalition of eight other countries. Iran, according to a UN report, backed the Houthis with money, training and arms. The US was also caught up in the fighting after one of its warships was attacked by missiles fired, the US said, by the Houthis. Despite ceasefires in 2016 and 2020, the war ground slowly on, leading to a stalemate and what, in 2020, UNICEF called “the largest humanitarian crisis in the world”.",
+        mapImg: "Resources/PastedVector-36.svg",
+        layoutClass: "layout-left zoom-map card-wide wedge-outer"
       },
       indiachina: {
         title: "India-China conflict",
@@ -811,8 +817,13 @@
       if (cardAboveCircle) {
         // Syria: wedge leaves the card's top-right corner and runs into the near side of the circle
         p1 = [card.offsetLeft + card.offsetWidth, card.offsetTop];
-        const vx = cx - p1[0], vy = cy - p1[1], vd = Math.hypot(vx, vy);
-        t1 = [cx - vx / vd * r, cy - vy / vd * r];
+        if (spotlightContainer.classList.contains('wedge-outer')) {
+          // Yemen: wedge wraps the circle, touching its outer (right-hand) tangent
+          t1 = tangentPoints(p1[0], p1[1], cx, cy, r).sort((a, b) => b[0] - a[0])[0];
+        } else {
+          const vx = cx - p1[0], vy = cy - p1[1], vd = Math.hypot(vx, vy);
+          t1 = [cx - vx / vd * r, cy - vy / vd * r];
+        }
       } else {
         // Turkey, Georgia: wedge leaves the card's top-left corner and touches the circle's upper tangent
         p1 = [card.offsetLeft, card.offsetTop];
