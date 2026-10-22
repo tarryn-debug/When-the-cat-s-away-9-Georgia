@@ -722,7 +722,7 @@
         title: "The Russo-Georgian war",
         body: "The relationship between Russia and Georgia has been tense ever since the fall of the Soviet Union and Russia’s annexation of Abkhazia and South Ossetia, two autonomous regions which Georgia and most of the world recognise as part of Georgia but which Russia and a few allies call independent states. In August 2008, after George W. Bush announced his support for Georgia joining NATO, tension boiled over and resulted in a bloody 5-day war between Russia and Georgia. By 2021, Georgia was still not a member of NATO and Russia still controlled Abkhazia and South Ossetia.",
         mapImg: "Resources/PastedVector-31.svg",
-        layoutClass: "layout-left"
+        layoutClass: "layout-left zoom-map anchor-card"
       },
       yemen: {
         title: "War and famine in Yemen",
@@ -792,6 +792,17 @@
       circle.style.setProperty('--cx', cx + 'px');
       circle.style.setProperty('--cy', cy + 'px');
 
+      // Georgia: hang the card from the circle so the top edge of the wedge
+      // shows above the card and the circle sits inside the wedge
+      if (spotlightContainer.classList.contains('anchor-card')) {
+        const top = Math.min(cy - 0.17 * circle.offsetWidth, app.offsetHeight - 12 - card.offsetHeight);
+        card.style.top = top + 'px';
+        card.style.bottom = 'auto';
+      } else {
+        card.style.top = '';
+        card.style.bottom = '';
+      }
+
       // Wedge: card top-left and bottom-right corners -> circle tangent points
       const r = circle.offsetWidth / 2 - 1;
       const p1 = [card.offsetLeft, card.offsetTop];
@@ -819,6 +830,8 @@
       const card = document.querySelector('.dialog-card');
       const pinImg = pin.querySelector('.pin-img');
 
+      card.style.top = '';
+      card.style.bottom = '';
       stack.style.transform = '';
       circle.style.setProperty('--dx', '0px');
 
